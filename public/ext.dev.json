@@ -1,0 +1,9 @@
+{
+  "identifier": "com.beshoysabri.sn-super-habit-tracker.dev",
+  "name": "Super Habit Tracker (Dev)",
+  "content_type": "SN|Component",
+  "area": "editor-editor",
+  "version": "1.0.0",
+  "description": "Super Habit Tracker - Development Version",
+  "url": "http://localhost:5173/index.html"
+}

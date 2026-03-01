@@ -1,0 +1,11 @@
+{
+  "identifier": "com.beshoysabri.sn-super-habit-tracker",
+  "name": "Super Habit Tracker",
+  "content_type": "SN|Component",
+  "area": "editor-editor",
+  "version": "1.0.0",
+  "description": "A modern habit tracker with year calendar views, boolean/counter tracking, streaks, and export. Dark-first, theme-aware.",
+  "url": "https://beshoysabri.github.io/sn-super-habit-tracker/index.html",
+  "latest_url": "https://beshoysabri.github.io/sn-super-habit-tracker/ext.json",
+  "marketing_url": "https://github.com/beshoysabri/sn-super-habit-tracker"
+}
