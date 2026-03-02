@@ -7,20 +7,22 @@ interface HeaderProps {
   view: ViewType;
   onViewChange: (view: ViewType) => void;
   onAddHabit: () => void;
+  onToggleSidebar: () => void;
 }
 
-const VIEW_LABELS: { key: ViewType; label: string }[] = [
-  { key: 'year', label: 'Year Calendar' },
-  { key: 'timeline', label: 'Year Timeline' },
-  { key: 'month', label: 'Month' },
-  { key: 'week', label: 'Week' },
-  { key: 'day', label: 'Day' },
+const VIEW_LABELS: { key: ViewType; label: string; short: string }[] = [
+  { key: 'year', label: 'Year Calendar', short: 'Year' },
+  { key: 'timeline', label: 'Year Timeline', short: 'Timeline' },
+  { key: 'month', label: 'Month', short: 'Month' },
+  { key: 'week', label: 'Week', short: 'Week' },
+  { key: 'day', label: 'Day', short: 'Day' },
 ];
 
-export function Header({ data, view, onViewChange, onAddHabit }: HeaderProps) {
+export function Header({ data, view, onViewChange, onAddHabit, onToggleSidebar }: HeaderProps) {
   return (
     <div className="ht-header">
       <div className="ht-header-left">
+        <button className="ht-menu-btn" onClick={onToggleSidebar} aria-label="Toggle sidebar">☰</button>
         <span className="ht-year-display">{data.year}</span>
         <div className="ht-view-toggle">
           {VIEW_LABELS.map(v => (
@@ -29,7 +31,8 @@ export function Header({ data, view, onViewChange, onAddHabit }: HeaderProps) {
               className={`ht-view-btn ${view === v.key ? 'active' : ''}`}
               onClick={() => onViewChange(v.key)}
             >
-              {v.label}
+              <span className="view-label-full">{v.label}</span>
+              <span className="view-label-short">{v.short}</span>
             </button>
           ))}
         </div>

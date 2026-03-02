@@ -40,6 +40,7 @@ export function HabitTracker({ data, onChange }: HabitTrackerProps) {
   const [showGroupModal, setShowGroupModal] = useState(false);
   const [editingGroup, setEditingGroup] = useState<HabitGroup | undefined>(undefined);
   const [confirmDeleteGroup, setConfirmDeleteGroup] = useState<string | null>(null);
+  const [sidebarOpen, setSidebarOpen] = useState(false);
 
   const selectedHabit = useMemo(
     () => selectedHabitId ? data.habits.find(h => h.id === selectedHabitId) ?? null : null,
@@ -183,6 +184,7 @@ export function HabitTracker({ data, onChange }: HabitTrackerProps) {
   const handleSelectHabit = useCallback((id: string | null) => {
     setSelectedHabitId(id);
     setShowDetail(false);
+    setSidebarOpen(false);
   }, []);
 
   const handleOpenDetail = useCallback(() => {
@@ -288,9 +290,11 @@ export function HabitTracker({ data, onChange }: HabitTrackerProps) {
         view={view}
         onViewChange={setView}
         onAddHabit={() => { setEditingHabit(undefined); setShowHabitModal(true); }}
+        onToggleSidebar={() => setSidebarOpen(s => !s)}
       />
 
-      <div className="ht-layout">
+      <div className={`ht-layout ${sidebarOpen ? 'sidebar-open' : ''}`}>
+        {sidebarOpen && <div className="ht-sidebar-overlay" onClick={() => setSidebarOpen(false)} />}
         <HabitSidebar
           data={data}
           selectedHabitId={selectedHabitId}

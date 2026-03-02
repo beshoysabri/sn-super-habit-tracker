@@ -295,6 +295,38 @@ body.sn-embedded {
   opacity: 0.9;
 }
 
+/* Hamburger menu button — hidden on desktop */
+.ht-menu-btn {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border: 1px solid var(--ht-border);
+  background: transparent;
+  color: var(--ht-fg);
+  border-radius: var(--ht-radius-sm);
+  font-size: 18px;
+  cursor: pointer;
+  transition: all var(--ht-transition);
+  flex-shrink: 0;
+}
+
+.ht-menu-btn:hover {
+  border-color: var(--ht-accent);
+  color: var(--ht-accent);
+}
+
+/* View label variants — full shown on desktop, short on mobile */
+.view-label-short {
+  display: none;
+}
+
+/* Sidebar overlay — only visible on mobile when sidebar is open */
+.ht-sidebar-overlay {
+  display: none;
+}
+
 /* ========================================
    Main Layout
    ======================================== */
@@ -1880,42 +1912,89 @@ body.sn-embedded {
 /* ========================================
    Mobile Responsive
    ======================================== */
+/* ========================================
+   Responsive — Tablet / Small Desktop
+   ======================================== */
 @media (max-width: 768px) {
+  /* Step 1: iOS input zoom fix */
+  .form-input, .form-textarea, .form-select { font-size: 16px; }
+
+  /* Step 2: Bump tiny fonts */
+  .timeline-day-header { font-size: 9px; }
+  .timeline-week-header { font-size: 8px; }
+  .year-week-number { font-size: 8px; }
+
+  /* Step 3: Enlarge touch targets */
+  .month-nav-btn { width: 36px; height: 36px; }
+  .day-counter-btn { width: 44px; height: 44px; font-size: 18px; }
+  .day-toggle-btn { min-height: 44px; }
+  .ht-icon-btn { width: 36px; height: 36px; }
+  .modal-close-btn { width: 36px; height: 36px; }
+  .ht-shortcuts-btn { width: 28px; height: 28px; font-size: 12px; }
+  .ht-sidebar-add-btn { width: 32px; height: 32px; font-size: 16px; }
+  .day-btn { min-width: 38px; min-height: 38px; }
+  .icon-picker-btn { width: 36px; height: 36px; }
+
+  /* Step 4: Header — show hamburger, short labels */
+  .ht-menu-btn { display: flex; }
+  .view-label-full { display: none; }
+  .view-label-short { display: inline; }
+  .ht-view-btn { padding: 6px 10px; flex: 1; text-align: center; }
+  .ht-view-toggle { flex: 1; }
+
+  /* Header compact */
   .ht-header {
     padding: 8px 12px;
     gap: 8px;
   }
+  .ht-header-left { flex: 1; min-width: 0; }
 
+  /* Step 5: Mobile sidebar drawer */
   .ht-sidebar {
-    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: 260px;
+    z-index: 100;
+    transform: translateX(-100%);
+    transition: transform 0.25s ease;
+    background: var(--ht-panel-bg);
+    border-right: 1px solid var(--ht-border);
   }
-
-  .ht-layout {
-    flex-direction: column;
+  .ht-layout.sidebar-open .ht-sidebar {
+    transform: translateX(0);
+    box-shadow: 4px 0 24px rgba(0, 0, 0, 0.3);
+  }
+  .ht-sidebar-overlay {
+    display: block;
+    position: fixed;
+    inset: 0;
+    z-index: 99;
+    background: rgba(0, 0, 0, 0.4);
   }
 
   .ht-content {
     padding: 12px;
   }
 
+  /* Year view grid */
   .year-months-grid {
     grid-template-columns: repeat(3, 1fr);
     gap: 12px;
   }
 
+  /* Week view */
   .week-grid {
     grid-template-columns: 120px repeat(7, 1fr) 40px;
   }
+  .week-habit-label { font-size: 12px; }
 
-  .week-habit-label {
-    font-size: 12px;
-  }
-
+  /* Modal — bottom sheet style */
   .modal-overlay {
     padding: 8px;
     align-items: flex-end;
   }
-
   .modal-content {
     max-width: 100%;
     max-height: 92vh;
@@ -1927,23 +2006,45 @@ body.sn-embedded {
   }
 }
 
+/* ========================================
+   Responsive — Phone
+   ======================================== */
 @media (max-width: 480px) {
+  /* Year grid 2-col */
   .year-months-grid {
     grid-template-columns: repeat(2, 1fr);
   }
 
+  /* Step 6: Week view label compression */
   .week-grid {
-    grid-template-columns: 100px repeat(7, 1fr) 36px;
+    grid-template-columns: 80px repeat(7, 1fr) 32px;
   }
+  .week-habit-label { font-size: 11px; }
 
+  /* View buttons */
   .ht-view-btn {
-    padding: 6px 8px;
+    padding: 6px 6px;
     font-size: 11px;
   }
 
   .month-view {
     max-width: 100%;
   }
+
+  /* Step 7: Month grid polish */
+  .month-cal-grid { gap: 3px; }
+  .month-cal-cell { font-size: 11px; }
+  .week-number-label { font-size: 8px; min-width: 18px; }
+
+  /* Step 8: Icon picker grid */
+  .icon-picker-grid { grid-template-columns: repeat(6, 1fr); }
+
+  /* Step 9: Statusbar overflow */
+  .ht-statusbar { font-size: 10px; padding: 6px 10px; }
+
+  /* Step 10: Full-screen modals */
+  .modal-overlay { padding: 0; }
+  .modal-content { max-height: 100dvh; border-radius: 0; }
 }
 
 /* ========================================
