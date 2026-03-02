@@ -81,7 +81,7 @@ export function DayView({ data, date, onDateChange, onToggleEntry, onCounterIncr
 
               if (status === 'done') {
                 btnClass = 'done';
-                btnContent = '✓';
+                btnContent = '✚';
                 btnStyle = { background: hexToRgba(habit.color, 0.7) };
               } else if (status === 'skipped') {
                 btnClass = 'skipped';
